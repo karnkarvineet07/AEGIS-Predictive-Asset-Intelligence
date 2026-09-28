@@ -1,0 +1,18 @@
+erDiagram
+ USERS ||--o{ PREDICTIONS : creates
+ LOCATIONS ||--o{ ASSETS : contains
+ ASSETS ||--o{ ASSET_METRICS : records
+ ASSETS ||--o{ FAILURES : experiences
+ ASSETS ||--o{ MAINTENANCE : receives
+ TECHNICIANS ||--o{ MAINTENANCE : performs
+ ASSETS ||--o{ PREDICTIONS : receives
+ ASSETS ||--o{ MAINTENANCE_SCHEDULE : schedules
+ LOCATIONS { int location_id PK string location_name string building string city }
+ ASSETS { int asset_id PK string asset_code string asset_name string asset_type int location_id FK string criticality string status }
+ TECHNICIANS { int technician_id PK string technician_name string specialization }
+ MAINTENANCE { int maintenance_id PK int asset_id FK int technician_id FK date maintenance_date string maintenance_type decimal cost }
+ ASSET_METRICS { bigint metric_id PK int asset_id FK datetime recorded_at decimal cpu_usage decimal memory_usage decimal temperature int error_count }
+ FAILURES { int failure_id PK int asset_id FK date failure_date string failure_type string severity decimal repair_cost }
+ PREDICTIONS { bigint prediction_id PK int asset_id FK date prediction_date decimal failure_probability string risk_level decimal health_score }
+ MAINTENANCE_SCHEDULE { bigint schedule_id PK int asset_id FK date scheduled_date string priority string status }
+ USERS { int user_id PK string full_name string email string role }

@@ -1,0 +1,31 @@
+{% extends "base.html" %}{% block page_title %}Operations Dashboard{% endblock %}
+{% block content %}
+<div class="hero-row"><div><div class="eyebrow">PREDICTIVE OPERATIONS</div><h1>Infrastructure at a glance.</h1><p>Monitor health, detect emerging risk, and prioritize maintenance using database-backed AI.</p></div><div class="hero-badge"><i class="bi bi-stars"></i><div><b>AI ENGINE</b><small>Random Forest / Live DB</small></div></div></div>
+<div class="kpi-grid">
+{% for label,value,icon,cls in [
+("Total Assets",kpi.total_assets,"bi-server","blue"),("Healthy Assets",kpi.healthy_assets,"bi-heart-pulse","green"),
+("Assets at Risk",kpi.at_risk,"bi-activity","amber"),("High-Risk Assets",kpi.high_risk,"bi-shield-exclamation","red"),
+("Total Failures",kpi.total_failures,"bi-bug","purple"),("Upcoming Maintenance",kpi.upcoming,"bi-calendar-check","cyan"),
+("Maintenance Cost","₹"+("{:,.0f}".format(kpi.maintenance_cost or 0)),"bi-cash-stack","slate")] %}
+<div class="kpi {{cls}}"><div class="kpi-icon"><i class="bi {{icon}}"></i></div><div><span>{{label}}</span><strong>{{value}}</strong></div></div>{% endfor %}
+</div>
+<div class="section-head"><div><div class="eyebrow">ATTENTION REQUIRED</div><h3>Operational alerts</h3></div><a href="{{url_for('assets.list_assets')}}" class="btn-soft">View assets <i class="bi bi-arrow-right"></i></a></div>
+<div class="alert-grid">
+<div class="panel"><div class="panel-title"><b>High-risk assets</b><span class="pill red">{{alerts.high|length}} flagged</span></div>
+{% for x in alerts.high %}<div class="alert-item"><span class="risk-dot red"></span><div><b>{{x.asset_code}} · {{x.asset_name}}</b><small>Health {{x.health_score}} · {{x.risk_level}} risk</small></div><a href="{{url_for('assets.detail',asset_id=x.asset_id)}}"><i class="bi bi-chevron-right"></i></a></div>{% else %}<div class="empty">No high-risk assets.</div>{% endfor %}</div>
+<div class="panel"><div class="panel-title"><b>Abnormal telemetry</b><span class="pill amber">live metrics</span></div>
+{% for x in alerts.temp %}<div class="alert-item"><span class="risk-dot amber"></span><div><b>{{x.asset_code}} · {{x.asset_name}}</b><small>Temp {{x.temperature}}°C · Errors {{x.error_count}}</small></div><i class="bi bi-thermometer-high"></i></div>{% else %}<div class="empty">Telemetry within thresholds.</div>{% endfor %}</div>
+</div>
+<div class="chart-grid">
+<div class="panel chart-panel"><div class="panel-title"><b>Asset portfolio</b><span>by type</span></div><canvas id="types"></canvas></div>
+<div class="panel chart-panel"><div class="panel-title"><b>Risk distribution</b><span>latest prediction</span></div><canvas id="risk"></canvas></div>
+<div class="panel chart-panel wide"><div class="panel-title"><b>Failures over time</b><span>monthly</span></div><canvas id="failures"></canvas></div>
+</div>
+<script>
+const data={{charts|tojson}};
+function chart(id,type,labels,vals,extra={}){new Chart(document.getElementById(id),{type,data:{labels,datasets:[{data:vals,borderWidth:2,borderRadius:6,tension:.35,...extra}]},options:{responsive:true,plugins:{legend:{display:type==='doughnut'}},scales:type==='line'?{y:{beginAtZero:true}}:{}}})}
+chart('types','bar',data.types.map(x=>x.label),data.types.map(x=>x.value));
+chart('risk','doughnut',data.risk.map(x=>x.label),data.risk.map(x=>x.value));
+chart('failures','line',data.failures.map(x=>x.label),data.failures.map(x=>x.value));
+</script>
+{% endblock %}

@@ -1,0 +1,12 @@
+{% extends "base.html" %}{% block page_title %}Technicians{% endblock %}
+{% block content %}
+<div class="section-head"><div><div class="eyebrow">PEOPLE / SERVICE DESK</div><h1>Technicians</h1><p>Manage maintenance specialists assigned to infrastructure.</p></div>
+{% if session.get("role")=="ADMIN" %}<button class="btn-primaryx" data-bs-toggle="modal" data-bs-target="#addTech"><i class="bi bi-plus-lg"></i> Add technician</button>{% endif %}</div>
+<div class="panel table-panel"><div class="table-responsive"><table class="table modern-table"><thead><tr><th>Name</th><th>Email</th><th>Specialization</th><th>Phone</th><th>Status</th></tr></thead>
+<tbody>{% for x in rows %}<tr><td><b>{{x.technician_name}}</b></td><td>{{x.email or '—'}}</td><td>{{x.specialization or 'General'}}</td><td>{{x.phone or '—'}}</td><td><span class="status {{x.status|lower}}">{{x.status}}</span></td></tr>{% endfor %}</tbody></table></div></div>
+<div class="modal fade" id="addTech"><div class="modal-dialog"><div class="modal-content"><form method="post" action="{{url_for('admin_data.add_technician')}}">{% if session.get("user_id") %}<input type="hidden" name="csrf_token" value="{{ csrf_token() }}">{% endif %}<div class="modal-header"><h5>Add technician</h5></div><div class="modal-body form-grid">
+<div><label>Name</label><input name="technician_name" required></div><div><label>Email</label><input name="email" type="email"></div>
+<div><label>Specialization</label><input name="specialization"></div><div><label>Phone</label><input name="phone"></div>
+<div><label>Status</label><select name="status"><option>ACTIVE</option><option>INACTIVE</option></select></div>
+</div><div class="modal-footer"><button class="btn-primaryx">Save technician</button></div></form></div></div></div>
+{% endblock %}

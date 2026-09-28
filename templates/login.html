@@ -1,0 +1,10 @@
+{% extends "base.html" %}{% block public %}
+<div class="login-wrap"><div class="login-card">
+<div class="brand justify-content-center"><span class="brand-mark"><i class="bi bi-cpu"></i></span><div><b>AEGIS</b><small>Predictive Asset Intelligence</small></div></div>
+<div class="login-copy"><h1>Infrastructure,<br><span>before it fails.</span></h1><p>Predictive maintenance intelligence for enterprise IT assets.</p></div>
+<form method="post">{% if session.get("user_id") %}<input type="hidden" name="csrf_token" value="{{ csrf_token() }}">{% endif %}<label>Email</label><input name="email" type="email" value="admin@demo.local" required>
+<label>Password</label><input name="password" type="password" value="Admin@123" required>
+<button class="btn-primaryx w-100">Sign in <i class="bi bi-arrow-right"></i></button></form>
+<div class="demo-note"><i class="bi bi-shield-check"></i> Demo administrator account preconfigured</div>
+</div></div>
+{% endblock %}

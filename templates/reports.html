@@ -1,0 +1,10 @@
+{% extends "base.html" %}{% block page_title %}Reports{% endblock %}
+{% block content %}
+<div class="section-head"><div><div class="eyebrow">REPORTING / MANAGEMENT INSIGHTS</div><h1>Operational reports</h1><p>Database-backed summaries for maintenance prioritization.</p></div>
+<button class="btn-soft" onclick="window.print()"><i class="bi bi-printer"></i> Print report</button></div>
+<div class="three-grid">
+<div class="panel"><div class="panel-title"><b>High-risk assets</b></div>{% for x in high_risk[:8] %}<div class="alert-item"><span class="risk-dot red"></span><div><b>{{x.asset_code}} · {{x.asset_name}}</b><small>Health {{x.health_score}} · {{x.failure_probability*100|round(1)}}%</small></div></div>{% endfor %}</div>
+<div class="panel"><div class="panel-title"><b>Failure / repair summary</b></div>{% for x in summary[:8] %}<div class="alert-item"><div><b>{{x.asset_code}}</b><small>{{x.failure_count}} failures · ₹{{x.total_repair_cost}}</small></div></div>{% endfor %}</div>
+<div class="panel"><div class="panel-title"><b>Maintenance cost</b></div>{% for x in maint[:8] %}<div class="alert-item"><div><b>{{x.asset_code}}</b><small>{{x.maintenance_count}} events · ₹{{x.total_maintenance_cost}}</small></div></div>{% endfor %}</div>
+</div>
+{% endblock %}

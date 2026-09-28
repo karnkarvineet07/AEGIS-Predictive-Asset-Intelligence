@@ -1,0 +1,5 @@
+{% extends "base.html" %}{% block page_title %}Failure History{% endblock %}
+{% block content %}
+<div class="section-head"><div><div class="eyebrow">RELIABILITY EVENTS</div><h1>Failure history</h1><p>Historical incidents feeding the predictive analytics pipeline.</p></div></div>
+<div class="panel table-panel"><div class="table-responsive"><table class="table modern-table"><thead><tr><th>Date</th><th>Asset</th><th>Failure</th><th>Severity</th><th>Downtime</th><th>Root cause</th><th>Repair cost</th></tr></thead><tbody>{% for x in rows %}<tr><td>{{x.failure_date}}</td><td><b>{{x.asset_code}}</b><span class="sub">{{x.asset_name}}</span></td><td>{{x.failure_type}}</td><td><span class="risk {{x.severity|lower}}">{{x.severity}}</span></td><td>{{x.downtime_hours}}h</td><td>{{x.root_cause}}</td><td>₹{{x.repair_cost}}</td></tr>{% endfor %}</tbody></table></div></div>
+{% endblock %}

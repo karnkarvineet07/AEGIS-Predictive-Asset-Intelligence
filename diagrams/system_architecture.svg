@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1400" height="800">
+<rect width="1400" height="800" fill="#f5f7fb"/>
+<text x="700" y="55" text-anchor="middle" font-family="Arial" font-size="32" font-weight="bold" fill="#101828">Predictive AI Asset Maintenance System</text>
+<g font-family="Arial" text-anchor="middle">
+<rect x="100" y="130" width="220" height="90" rx="16" fill="#111a2d"/><text x="210" y="165" font-size="20" fill="white">User / IT Admin</text><text x="210" y="192" font-size="13" fill="#aab5c9">Browser</text>
+<rect x="440" y="130" width="220" height="90" rx="16" fill="#315cf6"/><text x="550" y="165" font-size="20" fill="white">Web Interface</text><text x="550" y="192" font-size="13" fill="white">HTML / Bootstrap / JS</text>
+<rect x="780" y="130" width="220" height="90" rx="16" fill="#7a5af8"/><text x="890" y="165" font-size="20" fill="white">Flask Backend</text><text x="890" y="192" font-size="13" fill="white">Routes + APIs</text>
+<rect x="1100" y="130" width="220" height="90" rx="16" fill="#12b76a"/><text x="1210" y="165" font-size="20" fill="white">MySQL 8+</text><text x="1210" y="192" font-size="13" fill="white">Relational DB</text>
+<path d="M320 175h110M660 175h110M1000 175h100" stroke="#667085" stroke-width="4" marker-end="url(#a)"/>
+<rect x="290" y="360" width="250" height="105" rx="16" fill="#fff" stroke="#d0d5dd"/><text x="415" y="400" font-size="20" fill="#101828">Historical Data</text><text x="415" y="427" font-size="13" fill="#667085">Metrics • Failures</text><text x="415" y="447" font-size="13" fill="#667085">Maintenance</text>
+<rect x="575" y="360" width="250" height="105" rx="16" fill="#fff" stroke="#d0d5dd"/><text x="700" y="400" font-size="20" fill="#101828">Analytics Layer</text><text x="700" y="427" font-size="13" fill="#667085">Views • SQL • KPIs</text><text x="700" y="447" font-size="13" fill="#667085">Charts</text>
+<rect x="860" y="360" width="250" height="105" rx="16" fill="#101a2d"/><text x="985" y="400" font-size="20" fill="white">ML Engine</text><text x="985" y="427" font-size="13" fill="#aab5c9">Feature Engineering</text><text x="985" y="447" font-size="13" fill="#aab5c9">Random Forest / LR</text>
+<path d="M1210 220v90H415v45M1210 220v90H700v45M1210 220v90H985v45" fill="none" stroke="#98a2b3" stroke-width="3"/>
+<rect x="430" y="585" width="540" height="105" rx="16" fill="#315cf6"/><text x="700" y="625" font-size="22" fill="white">Prediction &amp; Maintenance Intelligence</text><text x="700" y="653" font-size="14" fill="white">Failure probability • Risk level • Health score • Recommendation</text>
+<path d="M415 465v80h285v40M700 465v80M985 465v80H700v40" fill="none" stroke="#315cf6" stroke-width="4"/>
+</g><defs><marker id="a" markerWidth="10" markerHeight="10" refX="8" refY="3" orient="auto"><path d="M0,0 L0,6 L9,3 z" fill="#667085"/></marker></defs></svg>

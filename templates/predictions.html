@@ -1,0 +1,5 @@
+{% extends "base.html" %}{% block page_title %}AI Predictions{% endblock %}
+{% block content %}
+<div class="section-head"><div><div class="eyebrow">MACHINE LEARNING / RISK ENGINE</div><h1>Failure predictions</h1><p>Latest model output stored in the relational prediction ledger.</p></div></div>
+<div class="panel table-panel"><div class="table-responsive"><table class="table modern-table"><thead><tr><th>Date</th><th>Asset</th><th>Probability</th><th>Risk</th><th>Health</th><th>Model</th><th>Recommendation</th></tr></thead><tbody>{% for x in rows %}<tr><td>{{x.prediction_date}}</td><td><b>{{x.asset_code}}</b><span class="sub">{{x.asset_name}} · {{x.criticality}}</span></td><td><b>{{(x.failure_probability*100)|round(1)}}%</b></td><td><span class="risk {{x.risk_level|lower}}">{{x.risk_level}}</span></td><td>{{x.health_score}}</td><td>{{x.model_version}}</td><td>{{x.recommendation}}</td></tr>{% endfor %}</tbody></table></div></div>
+{% endblock %}

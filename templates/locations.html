@@ -1,0 +1,11 @@
+{% extends "base.html" %}{% block page_title %}Locations{% endblock %}
+{% block content %}
+<div class="section-head"><div><div class="eyebrow">INFRASTRUCTURE / LOCATIONS</div><h1>Locations</h1><p>Data centers, branches, offices and operational sites.</p></div>
+{% if session.get("role")=="ADMIN" %}<button class="btn-primaryx" data-bs-toggle="modal" data-bs-target="#addLoc"><i class="bi bi-plus-lg"></i> Add location</button>{% endif %}</div>
+<div class="panel table-panel"><div class="table-responsive"><table class="table modern-table"><thead><tr><th>Location</th><th>Building</th><th>Floor</th><th>City</th><th>Region</th></tr></thead>
+<tbody>{% for x in rows %}<tr><td><b>{{x.location_name}}</b></td><td>{{x.building}}</td><td>{{x.floor or '—'}}</td><td>{{x.city}}</td><td>{{x.region or '—'}}</td></tr>{% endfor %}</tbody></table></div></div>
+<div class="modal fade" id="addLoc"><div class="modal-dialog"><div class="modal-content"><form method="post" action="{{url_for('admin_data.add_location')}}">{% if session.get("user_id") %}<input type="hidden" name="csrf_token" value="{{ csrf_token() }}">{% endif %}<div class="modal-header"><h5>Add location</h5></div><div class="modal-body form-grid">
+<div><label>Location name</label><input name="location_name" required></div><div><label>Building</label><input name="building" required></div>
+<div><label>Floor</label><input name="floor"></div><div><label>City</label><input name="city" required></div><div><label>Region</label><input name="region"></div>
+</div><div class="modal-footer"><button class="btn-primaryx">Save location</button></div></form></div></div></div>
+{% endblock %}

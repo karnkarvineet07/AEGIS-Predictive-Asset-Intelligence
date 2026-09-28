@@ -1,0 +1,13 @@
+{
+  "required_files": 21,
+  "missing_files": [],
+  "model_artifact": 3252,
+  "status": "PASS",
+  "tests": "9 passed",
+  "notes": [
+    "ML target uses next-30-day future failure from as-of telemetry snapshots",
+    "Training-only minority augmentation; evaluation set remains untouched",
+    "PBKDF2 password hashing with legacy hash upgrade",
+    "CSRF protection and role-based authorization"
+  ]
+}
